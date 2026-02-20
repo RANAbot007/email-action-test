@@ -1,0 +1,25 @@
+name: Cache CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: cache-39ca01a
+
+      - name: prime-cache-39ca01a
+        run: |
+          echo "Cache hit? -> ${{ steps.cache.outputs.cache-hit }}"
